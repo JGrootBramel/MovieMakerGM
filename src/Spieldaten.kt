@@ -8,7 +8,8 @@ object Spieldaten {
 
     private val regisseur = mutableListOf<Regisseur>()
 
-    val genres = listOf<String>("Action", "Drama", "Doku", "Comedy", "Fantasy", "Romanze")
+    val genres = listOf<String>("Action", "Comedy", "Drama", "Doku", "Horror",
+        "Fantasy", "Romanze", "Thriller")
 
     init {
 
@@ -19,6 +20,8 @@ object Spieldaten {
 
         regisseur.add( Regisseur( "Steven", "Spielberg"))
         regisseur.add( Regisseur( "Roland", "Emmerich"))
+        regisseur.add( Regisseur( "Hanna", "Heiter"))
+        regisseur.add( Regisseur( "Lars", "Lustig"))
     }
 
     fun zufaelligerSchauspieler () = schauspieler [ Random.nextInt(0, schauspieler.size)]

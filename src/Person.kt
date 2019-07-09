@@ -1,34 +1,90 @@
+import Spieldaten.zufaelligerSchauspieler
+import Spieldaten.zufaelligesGenre
 import kotlin.random.Random
 
-open class Person (val vorname : String, val name : String ) {
+class Erfahrung {
+    val maxErfahrung = Random.nextInt(MIN_INIT_WERT, MAX_INIT_WERT )
+    var lernfaktor = Random.nextInt(2, 7 )
+    var aktuellerWert = Random.nextInt(100 , maxErfahrung )
+    set(value) {
+        if (value == 0 && value <= maxErfahrung) {
+            field = value
+        }
 
-    var gehalt = Random.nextInt(500000 , 2000000 )
-    var erfahrung = Random.nextInt(100 , 200 )
+        if (field > hoechsterErfahrungswert) {
+            hoechsterErfahrungswert = field
+        }
+    }
 
-    override fun toString(): String = "Mein Name ist $vorname $name"
+    companion object {
 
-    open fun filmFertigProduziert (){
-        erfahrung += Random.nextInt( 10, 20 )
+        var hoechsterErfahrungswert = 0
+        private set
+
+        val MIN_INIT_WERT = 200
+        val MAX_INIT_WERT = 400
     }
 }
+
+abstract class Person (val vorname : String, val name : String ) {
+
+    var gehalt = Random.nextInt(500000 , 2000000 )
+
+    val erfahrung = Erfahrung()
+
+    override fun toString(): String = "Mein Name ist $vorname $name."
+
+    open fun filmFertigProduziert (){
+        erfahrung.aktuellerWert += erfahrung.lernfaktor
+        gehaltErhöhen()
+    }
+
+    abstract fun gehaltErhöhen()
+
+    fun verdientMehr (anderePerson : Person) : Person = if (this.gehalt > anderePerson.gehalt) this else anderePerson
+}
+
+
+
+
 
 class Regisseur ( vorname : String , name : String ) : Person (vorname , name) {
 
     val effizienzFaktor = Random.nextDouble( 0.7, 1.5)
-    val beforzugterSchauspieler = Spieldaten.Spieldaten.zufaelligerSchauspieler()
+    val beforzugterSchauspieler = zufaelligerSchauspieler()
 
-    override fun toString(): String = "Ich bin ein Regisseur " + super.toString()
+    override fun toString(): String = "Ich bin ein Regisseur! " + super.toString()
+
+    override fun filmFertigProduziert() {
+        super.filmFertigProduziert()
+        budgetVerwertung(1000)
+    }
 
     fun budgetVerwertung ( budget : Int ) = (budget * effizienzFaktor).toInt()
+
+    override fun gehaltErhöhen() {
+        gehalt += 10000
+    }
+
+
 }
 
-class Schauspieler ( vorname: String , name : String) {
+class Schauspieler ( vorname: String , name : String) : Person (vorname , name ) {
 
-    val genres = listOf<String>( Spieldaten.Spieldaten.zufaelligesGenre(), Spieldaten.Spieldaten.zufaelligesGenre())
+    val genres = listOf<String>( zufaelligesGenre() , zufaelligesGenre())
+
+    override fun filmFertigProduziert() {
+        super.filmFertigProduziert()
+    }
 
     override fun toString(): String {
         return "Ich bin ein Schauspieler! " + super.toString()
     }
+
+    override fun gehaltErhöhen() {
+        gehalt += (gehalt * 1.1).toInt()
+    }
+
 
 
     fun passendesGenre( genre : String ) = genres.contains(genre)
