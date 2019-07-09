@@ -21,11 +21,13 @@ class Film ( val regisseur : Regisseur , val hauptdarsteller : Schauspieler,
 
         bewertungen.add(b1)
         bewertungen.add(b2)
+        bewertungen.add( Kritiker ("Horstsch", "Puschalke"))
 
         // Durchschnitliche Bewertung berechnen
         var gesamtPunkte = 0
         for ( b in bewertungen) {
             gesamtPunkte += b.getPunkte(this)
+            b.getInfotext(this)
         }
 
         println("Die Bewertung von $titel ist $gesamtPunkte")

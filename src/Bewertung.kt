@@ -2,13 +2,12 @@ import kotlin.random.Random
 
 interface Bewertung{
     fun getPunkte ( film: Film ) : Int
-    fun getInfotext (film: Film ) : String
+    fun getInfotext (film: Film ) : String  =  "${getPunkte(film)} " + if (getPunkte(film) > 5) "Toller Film" else "Mieser Film"
 
 }
 
 class BewertungNachPassenderBesetzung : Bewertung {
 
-    override fun getInfotext(film: Film): String = if (getPunkte(film) > 5) "Toller Film" else "Mieser Film"
 
     override fun getPunkte(film: Film): Int {
 
@@ -25,7 +24,5 @@ class BewertungNachPassenderBesetzung : Bewertung {
 class BewertungsPerZufall : Bewertung {
 
     override fun getPunkte(film: Film): Int = Random.nextInt(1,10)
-
-    override fun getInfotext(film: Film): String = if (getPunkte(film) > 5) "Toller Film" else "Mieser Film"
 
 }

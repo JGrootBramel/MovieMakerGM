@@ -36,10 +36,10 @@ abstract class Person (val vorname : String, val name : String ) {
 
     open fun filmFertigProduziert (){
         erfahrung.aktuellerWert += erfahrung.lernfaktor
-        gehaltErhöhen()
+        gehaltErhoehen()
     }
 
-    abstract fun gehaltErhöhen()
+    abstract fun gehaltErhoehen()
 
     fun verdientMehr (anderePerson : Person) : Person = if (this.gehalt > anderePerson.gehalt) this else anderePerson
 }
@@ -62,7 +62,7 @@ class Regisseur ( vorname : String , name : String ) : Person (vorname , name) {
 
     fun budgetVerwertung ( budget : Int ) = (budget * effizienzFaktor).toInt()
 
-    override fun gehaltErhöhen() {
+    override fun gehaltErhoehen() {
         gehalt += 10000
     }
 
@@ -81,7 +81,7 @@ class Schauspieler ( vorname: String , name : String) : Person (vorname , name )
         return "Ich bin ein Schauspieler! " + super.toString()
     }
 
-    override fun gehaltErhöhen() {
+    override fun gehaltErhoehen() {
         gehalt += (gehalt * 1.1).toInt()
     }
 
