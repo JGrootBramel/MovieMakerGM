@@ -54,5 +54,7 @@ class SimpleArrayList : SimpleListForAnything {
 
     override fun size(): Int = index
 
+    override fun isEmpty() = index == 0
+
 
 }

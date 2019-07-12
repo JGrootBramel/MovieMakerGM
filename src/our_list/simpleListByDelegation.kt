@@ -25,4 +25,6 @@ class SimpleListByDelegation : SimpleListForAnything {
         data.remove(obj)
     }
 
+    override fun isEmpty(): Boolean = data.isEmpty()
+
 }

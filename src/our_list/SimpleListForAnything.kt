@@ -9,4 +9,5 @@ interface SimpleListForAnything {
     fun getFirst () : Any
     fun get ( n : Int ) : Any
     fun removeObject ( obj : Any)
+    fun isEmpty () : Boolean
 }
