@@ -1,5 +1,7 @@
 package our_list
 
+import java.lang.IndexOutOfBoundsException
+
 class SimpleLinkedList : SimpleListForAnything {
 
 
@@ -27,23 +29,54 @@ class SimpleLinkedList : SimpleListForAnything {
     }
 
     override fun contains(obj: Any): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var run = first
+        while (run != null ) {
+            if (run.data == obj) return true
+            run = run.next
+        }
+        return false
     }
 
     override fun size(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        var run = first
+        var count = 0
+        while ( run != null ) {
+            count++
+            run = run.next
+        }
+        return count
     }
 
-    override fun getFirst(): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getFirst() : Any = get(0)
 
     override fun get(n: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if ( n < 0 ) throw IndexOutOfBoundsException()
+        var run = first
+        var count = 0
+        while ( count < 0 && run != null) {
+            run = run.next
+            count++
+        }
+        return run?.data ?: throw IndexOutOfBoundsException()
     }
 
+
     override fun removeObject(obj: Any) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        var run = first
+
+        if (run?.data == obj) {
+            first = first.next
+        } else {
+
+            while (run?.next?.data != obj) {
+                run = run?.next
+            }
+
+            run?.next = run?.next?.next
+
+        }
     }
 
     override fun isEmpty() = first == null
