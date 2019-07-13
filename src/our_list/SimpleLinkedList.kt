@@ -54,7 +54,7 @@ class SimpleLinkedList : SimpleListForAnything {
         if ( n < 0 ) throw IndexOutOfBoundsException()
         var run = first
         var count = 0
-        while ( count < 0 && run != null) {
+        while ( count < n && run != null) {
             run = run.next
             count++
         }
@@ -67,7 +67,7 @@ class SimpleLinkedList : SimpleListForAnything {
         var run = first
 
         if (run?.data == obj) {
-            first = first.next
+            first = first?.next
         } else {
 
             while (run?.next?.data != obj) {

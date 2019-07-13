@@ -2,11 +2,12 @@ package our_list
 
 fun main () {
 
-    val list : SimpleListForAnything = SimpleArrayList()
+    val list : SimpleListForAnything = SimpleLinkedList()
 
-    list.addFirst("A")
+    list.addFirst("a")
     list.addFirst("B")
-    list.addFirst("C")
+    list.addFirst("A")
+    ausgabe(list)
     list.addLast("X")
     list.addLast("Y")
     list.addLast("Z")
@@ -15,10 +16,15 @@ fun main () {
 
     ausgabe(list)
 
-    println("A in List: ${list.contains("A")}")
-    println("X in List ${list.contains("X")}")
-    list.removeObject("X")
-    println("X in List ${list.contains("X")}")
+    println(list.contains("A"))
+    println(list.contains("Z"))
+    list.removeObject("A")
+    list.removeObject("Z")
+    println(list.contains("A"))
+    println(list.contains("Z"))
+
+    ausgabe(list)
+
 
 }
 
