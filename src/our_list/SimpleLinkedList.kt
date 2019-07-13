@@ -15,16 +15,16 @@ class SimpleLinkedList : SimpleListForAnything {
 
     override fun addLast(obj: Any) {
 
-        if ( first == null ) addFirst(obj)
+        if ( first == null ) {
+            addFirst(obj)
+        } else {
+            var runPointer = first
+            while (runPointer?.next != null) {
+                runPointer = runPointer.next
+            }
 
-        var runPointer = first
-
-        while (runPointer?.next != null ) {
-            runPointer = runPointer.next
+            runPointer?.next = Node(obj, null)
         }
-
-        runPointer?.next = Node (obj , null)
-
 
     }
 
@@ -74,7 +74,7 @@ class SimpleLinkedList : SimpleListForAnything {
                 run = run?.next
             }
 
-            run?.next = run?.next?.next
+            run.next = run.next?.next
 
         }
     }
